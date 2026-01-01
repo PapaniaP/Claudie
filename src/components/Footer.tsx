@@ -1,16 +1,19 @@
 export const Footer = () => {
   return (
-    <footer className="bg-neutral-900 text-neutral-400 py-12">
+    <footer className="bg-heritage-navy text-neutral-stone py-16 border-t border-heritage-gold/20">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-            <p className="text-sm">
-              © {new Date().getFullYear()} Pro Tennis Coach. All rights reserved.
-            </p>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-8">
+            <h3 className="font-serif text-2xl text-neutral-cream mb-2">Clay Court Academy</h3>
+            <p className="text-sm uppercase tracking-wider text-heritage-gold">Est. 2010</p>
           </div>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-clay-400 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-clay-400 transition-colors">Terms of Service</a>
+
+          <div className="flex flex-col md:flex-row justify-center items-center gap-8 text-sm">
+            <p>© {new Date().getFullYear()} Clay Court Academy</p>
+            <span className="hidden md:block text-heritage-gold">·</span>
+            <a href="#" className="hover:text-heritage-gold transition-colors">Privacy</a>
+            <span className="hidden md:block text-heritage-gold">·</span>
+            <a href="#" className="hover:text-heritage-gold transition-colors">Terms</a>
           </div>
         </div>
       </div>

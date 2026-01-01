@@ -1,5 +1,4 @@
 import { motion, useInView } from 'framer-motion';
-import { Mail, MessageCircle } from 'lucide-react';
 import { useRef } from 'react';
 
 export const Contact = () => {
@@ -7,65 +6,77 @@ export const Contact = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="contact" ref={ref} className="relative py-32 bg-white overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
+    <section id="contact" ref={ref} className="py-32 bg-neutral-cream">
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
           >
-            <h2 className="font-display text-5xl md:text-7xl font-bold text-neutral-900 mb-8 leading-tight">
-              Let's talk<br />
-              <span className="text-clay-600">tennis.</span>
+            <div className="w-16 h-px bg-heritage-gold mx-auto mb-8" />
+            <h2 className="font-serif text-4xl md:text-6xl font-normal text-heritage-navy mb-12">
+              Inquiries
             </h2>
+          </motion.div>
 
-            <p className="text-xl md:text-2xl text-neutral-700 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Whether you're looking to go pro, improve your local ranking, or just fall in love
-              with the game—reach out. Every great player starts with a conversation.
+          <motion.div
+            className="space-y-8 mb-16"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <p className="text-lg text-neutral-charcoal leading-relaxed font-light">
+              Prospective students and their families are welcome to schedule a consultation
+              to discuss training goals and academy enrollment.
             </p>
+
+            <div className="space-y-4 pt-8">
+              <div>
+                <p className="text-sm uppercase tracking-wider text-heritage-gold mb-2">Email</p>
+                <a
+                  href="mailto:academy@claycourt.de"
+                  className="text-xl text-heritage-navy hover:text-heritage-gold transition-colors"
+                >
+                  academy@claycourt.de
+                </a>
+              </div>
+
+              <div>
+                <p className="text-sm uppercase tracking-wider text-heritage-gold mb-2">Telephone</p>
+                <a
+                  href="tel:+495551234567"
+                  className="text-xl text-heritage-navy hover:text-heritage-gold transition-colors"
+                >
+                  +49 (555) 123-4567
+                </a>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-6 justify-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <a
-              href="mailto:coach@claycourtpro.com"
-              className="group inline-flex items-center justify-center gap-3 px-8 py-5 bg-clay-600 text-white font-semibold text-lg rounded-sm hover:bg-clay-700 transition-all hover:scale-105"
-            >
-              <Mail className="w-6 h-6" />
-              <span>coach@claycourtpro.com</span>
-            </a>
-
-            <a
-              href="tel:+15551234567"
-              className="group inline-flex items-center justify-center gap-3 px-8 py-5 border-2 border-neutral-900 text-neutral-900 font-semibold text-lg rounded-sm hover:bg-neutral-900 hover:text-white transition-all"
-            >
-              <MessageCircle className="w-6 h-6" />
-              <span>+1 (555) 123-4567</span>
-            </a>
-          </motion.div>
-
-          <motion.div
-            className="grid md:grid-cols-3 gap-8 pt-16 border-t border-neutral-200"
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            className="border-t border-neutral-stone pt-12 grid md:grid-cols-3 gap-8 text-sm"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.5 }}
           >
             <div>
-              <div className="text-sm text-neutral-500 uppercase tracking-wider mb-2">Location</div>
-              <div className="text-lg text-neutral-900">Premium Clay Courts<br />City Center</div>
+              <p className="text-heritage-gold uppercase tracking-wider mb-2">Location</p>
+              <p className="text-neutral-charcoal font-light">
+                Premium Clay Courts<br />City Center
+              </p>
             </div>
             <div>
-              <div className="text-sm text-neutral-500 uppercase tracking-wider mb-2">Availability</div>
-              <div className="text-lg text-neutral-900">7 days a week<br />6AM - 8PM</div>
+              <p className="text-heritage-gold uppercase tracking-wider mb-2">Training Hours</p>
+              <p className="text-neutral-charcoal font-light">
+                Monday - Saturday<br />6:00 - 20:00
+              </p>
             </div>
             <div>
-              <div className="text-sm text-neutral-500 uppercase tracking-wider mb-2">First Session</div>
-              <div className="text-lg font-semibold text-clay-600">Free 30-min Evaluation</div>
+              <p className="text-heritage-gold uppercase tracking-wider mb-2">Consultation</p>
+              <p className="text-neutral-charcoal font-light">
+                Complimentary initial<br />assessment
+              </p>
             </div>
           </motion.div>
         </div>

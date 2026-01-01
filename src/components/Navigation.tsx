@@ -6,10 +6,11 @@ export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { scrollY } = useScroll();
+
   const backgroundColor = useTransform(
     scrollY,
     [0, 100],
-    ['rgba(250, 248, 243, 0)', 'rgba(250, 248, 243, 0.98)']
+    ['rgba(26, 35, 50, 0)', 'rgba(26, 35, 50, 0.98)']
   );
 
   useEffect(() => {
@@ -22,9 +23,9 @@ export const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { href: '#story', label: 'Story' },
-    { href: '#training', label: 'Training' },
-    { href: '#testimonials', label: 'Results' },
+    { href: '#philosophy', label: 'Philosophy' },
+    { href: '#academy', label: 'Academy' },
+    { href: '#credentials', label: 'Credentials' },
     { href: '#contact', label: 'Contact' },
   ];
 
@@ -40,10 +41,10 @@ export const Navigation = () => {
           {/* Logo */}
           <motion.a
             href="#"
-            className="font-display text-2xl font-bold text-neutral-900"
-            whileHover={{ scale: 1.05 }}
+            className="font-serif text-xl text-neutral-cream"
+            whileHover={{ opacity: 0.7 }}
           >
-            Clay<span className="text-clay-600">Court</span>
+            Clay Court Academy
           </motion.a>
 
           {/* Desktop Navigation */}
@@ -52,23 +53,17 @@ export const Navigation = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-neutral-900 hover:text-clay-600 transition-colors font-medium"
+                className="text-neutral-cream hover:text-heritage-gold transition-colors text-sm uppercase tracking-wider"
               >
                 {link.label}
               </a>
             ))}
-            <a
-              href="#contact"
-              className="bg-clay-600 text-white px-6 py-2 rounded-sm hover:bg-clay-700 transition-colors font-semibold"
-            >
-              Get in Touch
-            </a>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-neutral-900 p-2"
+            className="md:hidden text-neutral-cream p-2"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -80,24 +75,17 @@ export const Navigation = () => {
           animate={{ height: isOpen ? 'auto' : 0 }}
           className="md:hidden overflow-hidden"
         >
-          <div className="py-4 space-y-4 bg-cream">
+          <div className="py-4 space-y-4 bg-heritage-navy">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="block text-neutral-900 hover:text-clay-600 transition-colors font-medium"
+                className="block text-neutral-cream hover:text-heritage-gold transition-colors text-sm uppercase tracking-wider"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
               </a>
             ))}
-            <a
-              href="#contact"
-              className="block bg-clay-600 text-white px-6 py-2 rounded-sm hover:bg-clay-700 transition-colors font-semibold text-center"
-              onClick={() => setIsOpen(false)}
-            >
-              Get in Touch
-            </a>
           </div>
         </motion.div>
       </div>
