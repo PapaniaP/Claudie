@@ -7,16 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        heritage: {
-          navy: '#1a2332',
-          forest: '#2d4a2b',
-          burgundy: '#5d2e2e',
-          gold: '#b8935e',
+        forest: {
+          50: '#f0f4f0',
+          100: '#d9e5d9',
+          500: '#2d4a2b',
+          700: '#1a2e19',
+          900: '#0d1a0c',
         },
-        neutral: {
-          cream: '#f8f6f1',
-          stone: '#e4e0d7',
-          charcoal: '#3a3a3a',
+        clay: {
+          300: '#d89966',
+          500: '#c67b3e',
+          700: '#8b4513',
         },
       },
       fontFamily: {

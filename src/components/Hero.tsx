@@ -1,74 +1,48 @@
 import { motion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center bg-heritage-navy overflow-hidden">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(45deg, #000 25%, transparent 25%),
-                           linear-gradient(-45deg, #000 25%, transparent 25%),
-                           linear-gradient(45deg, transparent 75%, #000 75%),
-                           linear-gradient(-45deg, transparent 75%, #000 75%)`,
-          backgroundSize: '20px 20px',
-          backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px',
-        }} />
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-5xl mx-auto text-center py-32">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="mb-8"
-          >
-            <div className="w-24 h-px bg-heritage-gold mx-auto mb-8" />
-            <p className="text-heritage-gold text-sm uppercase tracking-[0.3em] font-sans mb-4">
-              Est. 2010
-            </p>
-          </motion.div>
-
-          <motion.h1
-            className="font-serif text-5xl md:text-7xl lg:text-8xl font-normal text-neutral-cream mb-12 leading-tight"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            Excellence Through<br />
-            <span className="italic">Discipline</span>
-          </motion.h1>
-
-          <motion.p
-            className="text-xl md:text-2xl text-neutral-stone max-w-3xl mx-auto leading-relaxed font-light mb-16"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.7 }}
-          >
-            A traditional approach to tennis coaching. Focused on technique, strategy,
-            and the mental fortitude required for championship play.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-          >
-            <div className="w-24 h-px bg-heritage-gold mx-auto" />
-          </motion.div>
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Large Background Image */}
+      <div className="absolute inset-0 bg-gradient-to-br from-clay-700 via-forest-700 to-forest-900">
+        {/* Placeholder for large hero image of clay court/coach action */}
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 flex items-center justify-center opacity-20">
+          <div className="text-white text-2xl font-light">[ Hero Image: Clay Court Action Shot ]</div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Minimal Text Overlay */}
+      <div className="relative z-10 text-center text-white px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="max-w-4xl mx-auto"
+        >
+          <h1 className="font-serif text-6xl md:text-8xl font-normal mb-6">
+            Clay Court Excellence
+          </h1>
+          <p className="text-xl md:text-2xl font-light mb-12 text-white/90">
+            Stein bei Nürnberg, Bavaria
+          </p>
+          <a
+            href="#contact"
+            className="inline-block bg-white text-forest-900 px-10 py-4 text-lg font-medium hover:bg-forest-50 transition-all"
+          >
+            Train With Us
+          </a>
+        </motion.div>
+      </div>
+
+      {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
       >
-        <div className="flex flex-col items-center gap-3">
-          <span className="text-heritage-gold text-xs uppercase tracking-widest">Scroll</span>
-          <div className="w-px h-16 bg-heritage-gold/50" />
-        </div>
+        <ChevronDown className="w-8 h-8 text-white/80" />
       </motion.div>
     </section>
   );
