@@ -1,28 +1,25 @@
 import { motion, useInView } from 'framer-motion';
-import { User, Users, Trophy, Target } from 'lucide-react';
 import { useRef } from 'react';
 
-const services = [
+const offerings = [
   {
-    icon: User,
-    title: 'Individual Lessons',
-    description: 'One-on-one personalized coaching tailored to your skill level and goals.',
-    features: ['Custom training plan', 'Video analysis', 'Flexible scheduling', 'Progress tracking'],
-    price: 'From $80/hour',
+    title: 'Private Training',
+    description: 'One-on-one sessions focused entirely on your development. We analyze your game, build custom strategies, and work intensively on technique, footwork, and mental resilience.',
+    ideal: 'Serious competitors, professionals, players seeking rapid improvement',
+    commitment: '1-2 hour sessions',
   },
   {
-    icon: Users,
-    title: 'Group Sessions',
-    description: 'Learn alongside others in small groups with focused skill development.',
-    features: ['Max 4 players', 'Competitive drills', 'Social environment', 'Cost-effective'],
-    price: 'From $35/hour',
+    title: 'Small Group Coaching',
+    description: 'Train with 2-4 players at your level. Competitive drills, match play, and tactical training in a motivating group environment.',
+    ideal: 'Intermediate to advanced players who thrive in team settings',
+    commitment: '90-minute sessions',
   },
-];
-
-const stats = [
-  { icon: Trophy, value: '15+', label: 'Years Experience' },
-  { icon: Target, value: '500+', label: 'Students Coached' },
-  { icon: Users, value: '95%', label: 'Satisfaction Rate' },
+  {
+    title: 'Tournament Preparation',
+    description: 'Intensive pre-tournament training covering match strategy, mental preparation, and situation-specific drills. Includes video analysis of opponents when available.',
+    ideal: 'Competitive players preparing for specific events',
+    commitment: 'Custom packages',
+  },
 ];
 
 export const Services = () => {
@@ -30,62 +27,49 @@ export const Services = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="services" ref={ref} className="py-24 bg-white relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-clay-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2" />
-
+    <section id="training" ref={ref} className="py-32 bg-sand/30 relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="max-w-3xl mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-display text-5xl md:text-6xl font-bold mb-4">
-            Choose Your <span className="text-clay-500">Path</span>
+          <h2 className="font-display text-5xl md:text-6xl font-bold text-neutral-900 mb-6 leading-tight">
+            How We <span className="text-clay-600">Work Together</span>
           </h2>
-          <p className="text-xl text-neutral-600 max-w-2xl mx-auto">
-            Whether you prefer personalized attention or team dynamics, we have the perfect program for you.
+          <p className="text-xl text-neutral-700 leading-relaxed">
+            Whether you're chasing professional rankings or simply want to dominate your local
+            league, I tailor every session to your specific goals. No cookie-cutter programs.
           </p>
         </motion.div>
 
-        {/* Service Cards */}
-        <div className="grid md:grid-cols-2 gap-8 mb-20 max-w-5xl mx-auto">
-          {services.map((service, index) => (
+        <div className="space-y-6 max-w-5xl">
+          {offerings.map((offering, index) => (
             <motion.div
-              key={service.title}
-              className="group relative"
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              whileHover={{ y: -10 }}
+              key={offering.title}
+              className="group bg-white rounded-sm p-8 md:p-12 border-l-4 border-clay-600 hover:shadow-xl transition-all duration-300"
+              initial={{ opacity: 0, x: -50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              whileHover={{ x: 5 }}
             >
-              <div className="relative bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-2xl transition-all duration-300 overflow-hidden">
-                {/* Accent bar */}
-                <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-clay-400 to-clay-600 transform scale-y-0 group-hover:scale-y-100 transition-transform origin-top" />
-
-                <div className="relative">
-                  <div className="w-16 h-16 bg-clay-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-clay-500 transition-colors">
-                    <service.icon className="w-8 h-8 text-clay-600 group-hover:text-white transition-colors" />
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+                <div className="flex-1">
+                  <h3 className="font-display text-3xl font-bold text-neutral-900 mb-4">
+                    {offering.title}
+                  </h3>
+                  <p className="text-lg text-neutral-700 leading-relaxed mb-6">
+                    {offering.description}
+                  </p>
+                  <div className="space-y-2">
+                    <div className="text-sm text-neutral-500 uppercase tracking-wider">Ideal For</div>
+                    <div className="text-neutral-900">{offering.ideal}</div>
                   </div>
-
-                  <h3 className="font-display text-3xl font-bold mb-3">{service.title}</h3>
-                  <p className="text-neutral-600 mb-6">{service.description}</p>
-
-                  <ul className="space-y-3 mb-6">
-                    {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center text-neutral-700">
-                        <svg className="w-5 h-5 text-clay-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="pt-6 border-t border-neutral-200">
-                    <p className="text-2xl font-bold text-clay-600">{service.price}</p>
+                </div>
+                <div className="md:text-right flex-shrink-0">
+                  <div className="inline-block bg-clay-600 text-white px-4 py-2 rounded-sm text-sm font-medium">
+                    {offering.commitment}
                   </div>
                 </div>
               </div>
@@ -93,27 +77,22 @@ export const Services = () => {
           ))}
         </div>
 
-        {/* Stats */}
+        {/* CTA */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
+          className="mt-20 text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
         >
-          {stats.map((stat) => (
-            <motion.div
-              key={stat.label}
-              className="text-center"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-clay-500 rounded-full mb-4">
-                <stat.icon className="w-8 h-8 text-white" />
-              </div>
-              <div className="font-display text-4xl font-bold text-neutral-900 mb-2">{stat.value}</div>
-              <div className="text-neutral-600">{stat.label}</div>
-            </motion.div>
-          ))}
+          <p className="text-lg text-neutral-600 mb-6">
+            Not sure which option fits your goals? Let's talk.
+          </p>
+          <a
+            href="#contact"
+            className="inline-block px-10 py-4 bg-neutral-900 text-white font-semibold text-lg rounded-sm hover:bg-clay-700 transition-all hover:scale-105"
+          >
+            Schedule a Consultation
+          </a>
         </motion.div>
       </div>
     </section>

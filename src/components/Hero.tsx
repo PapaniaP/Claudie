@@ -1,5 +1,4 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
 import { useRef } from 'react';
 
 export const Hero = () => {
@@ -9,83 +8,97 @@ export const Hero = () => {
     offset: ['start start', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.5, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <section ref={ref} className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Parallax Background */}
+    <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden bg-cream">
+      {/* Large Background Image with Parallax */}
       <motion.div
-        style={{ y, scale }}
-        className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900"
+        style={{ y }}
+        className="absolute inset-0 z-0"
       >
-        <div className="absolute inset-0 bg-clay-600/10" />
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(241, 93, 32, 0.15) 1px, transparent 0)`,
-          backgroundSize: '50px 50px',
-        }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cream/95 z-10" />
+        {/* Placeholder for hero image - replace with actual photo */}
+        <div className="w-full h-full bg-gradient-to-br from-clay-700 via-clay-600 to-clay-800 opacity-20"
+          style={{
+            backgroundImage: `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%238b4513" width="1200" height="800"/><circle cx="600" cy="400" r="300" fill="%23a86334" opacity="0.3"/></svg>')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
       </motion.div>
 
       {/* Content */}
-      <motion.div
-        style={{ opacity }}
-        className="relative z-10 text-center px-4 max-w-5xl mx-auto"
-      >
+      <div className="container mx-auto px-4 relative z-20 py-32">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          style={{ opacity }}
+          className="max-w-4xl"
         >
+          <motion.p
+            className="text-clay-700 text-lg md:text-xl font-medium mb-6 tracking-wide uppercase"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Clay Court Specialist
+          </motion.p>
+
           <motion.h1
-            className="font-display text-6xl md:text-8xl font-bold text-white mb-6"
+            className="font-display text-6xl md:text-7xl lg:text-8xl font-bold text-neutral-900 mb-8 leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Master the
-            <span className="block text-clay-400">Clay Court</span>
+            Tennis is more than<br />
+            <span className="text-clay-600">a game.</span>
           </motion.h1>
-        </motion.div>
 
-        <motion.p
-          className="text-xl md:text-2xl text-neutral-300 mb-12 max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          Professional tennis coaching tailored to your goals. Individual sessions or group training.
-        </motion.p>
+          <motion.p
+            className="text-xl md:text-2xl text-neutral-700 mb-12 max-w-2xl leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            It's discipline, strategy, and the pursuit of excellence. For 15 years, I've helped players
+            master the clay—where patience meets power, and every rally tells a story.
+          </motion.p>
 
-        <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-        >
-          <a
-            href="#contact"
-            className="group relative px-8 py-4 bg-clay-500 text-white font-semibold rounded-lg overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-clay-500/50"
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <span className="relative z-10">Book Your Session</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-clay-600 to-clay-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-          </a>
-          <a
-            href="#services"
-            className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-neutral-900 transition-all"
-          >
-            View Programs
-          </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center px-10 py-4 bg-clay-600 text-white font-semibold text-lg rounded-sm hover:bg-clay-700 transition-all hover:scale-105"
+            >
+              Start Your Journey
+            </a>
+            <a
+              href="#story"
+              className="inline-flex items-center justify-center px-10 py-4 border-2 border-neutral-900 text-neutral-900 font-semibold text-lg rounded-sm hover:bg-neutral-900 hover:text-white transition-all"
+            >
+              My Story
+            </a>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
       >
-        <ChevronDown className="w-8 h-8 text-clay-400" />
+        <span className="text-sm text-neutral-600 uppercase tracking-wider">Scroll</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="w-px h-12 bg-neutral-400"
+        />
       </motion.div>
     </section>
   );

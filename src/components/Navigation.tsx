@@ -9,7 +9,12 @@ export const Navigation = () => {
   const backgroundColor = useTransform(
     scrollY,
     [0, 100],
-    ['rgba(23, 23, 23, 0)', 'rgba(23, 23, 23, 0.95)']
+    ['rgba(250, 248, 243, 0)', 'rgba(250, 248, 243, 0.98)']
+  );
+  const textColor = useTransform(
+    scrollY,
+    [0, 100],
+    ['rgb(23, 23, 23)', 'rgb(23, 23, 23)']
   );
 
   useEffect(() => {
@@ -22,8 +27,9 @@ export const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { href: '#services', label: 'Programs' },
-    { href: '#about', label: 'About' },
+    { href: '#story', label: 'Story' },
+    { href: '#training', label: 'Training' },
+    { href: '#testimonials', label: 'Results' },
     { href: '#contact', label: 'Contact' },
   ];
 
@@ -39,10 +45,10 @@ export const Navigation = () => {
           {/* Logo */}
           <motion.a
             href="#"
-            className="font-display text-2xl font-bold text-white"
+            className="font-display text-2xl font-bold text-neutral-900"
             whileHover={{ scale: 1.05 }}
           >
-            Tennis<span className="text-clay-400">Pro</span>
+            Clay<span className="text-clay-600">Court</span>
           </motion.a>
 
           {/* Desktop Navigation */}
@@ -51,23 +57,23 @@ export const Navigation = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-white hover:text-clay-400 transition-colors font-medium"
+                className="text-neutral-900 hover:text-clay-600 transition-colors font-medium"
               >
                 {link.label}
               </a>
             ))}
             <a
               href="#contact"
-              className="bg-clay-500 text-white px-6 py-2 rounded-lg hover:bg-clay-600 transition-colors font-semibold"
+              className="bg-clay-600 text-white px-6 py-2 rounded-sm hover:bg-clay-700 transition-colors font-semibold"
             >
-              Book Now
+              Get in Touch
             </a>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white p-2"
+            className="md:hidden text-neutral-900 p-2"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -79,12 +85,12 @@ export const Navigation = () => {
           animate={{ height: isOpen ? 'auto' : 0 }}
           className="md:hidden overflow-hidden"
         >
-          <div className="py-4 space-y-4">
+          <div className="py-4 space-y-4 bg-cream">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="block text-white hover:text-clay-400 transition-colors font-medium"
+                className="block text-neutral-900 hover:text-clay-600 transition-colors font-medium"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
@@ -92,10 +98,10 @@ export const Navigation = () => {
             ))}
             <a
               href="#contact"
-              className="block bg-clay-500 text-white px-6 py-2 rounded-lg hover:bg-clay-600 transition-colors font-semibold text-center"
+              className="block bg-clay-600 text-white px-6 py-2 rounded-sm hover:bg-clay-700 transition-colors font-semibold text-center"
               onClick={() => setIsOpen(false)}
             >
-              Book Now
+              Get in Touch
             </a>
           </div>
         </motion.div>
