@@ -63,7 +63,7 @@ export const Contact = () => {
             <div>
               <p className="text-heritage-gold uppercase tracking-wider mb-2">Location</p>
               <p className="text-neutral-charcoal font-light">
-                Premium Clay Courts<br />City Center
+                Stein bei Nürnberg<br />Bavaria, Germany
               </p>
             </div>
             <div>
