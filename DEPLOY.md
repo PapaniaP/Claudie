@@ -19,22 +19,28 @@ Since you want to test on mobile, here are the easiest ways to deploy and access
 - Auto-deploys on git push
 - Great performance
 
-## 🎯 Option 2: Netlify
+## 🎯 Option 2: Netlify (Updated 2026 Steps)
 
-1. Go to [netlify.com](https://netlify.com)
-2. Sign in with GitHub
-3. Click "Add new site" → "Import an existing project"
-4. Choose GitHub and select `PapaniaP/Claudie`
-5. Select the branch: `claude/tennis-coach-landing-LdThe`
-6. Settings are auto-configured (via `netlify.toml`)
-7. Click "Deploy"
-8. Get your URL like: `your-project.netlify.app`
+1. Go to [app.netlify.com](https://app.netlify.com) and sign in with GitHub
+2. From your team dashboard, click **"Add new site"**
+3. Select **"Import an existing project"**
+4. Choose **GitHub** as your Git provider (authorize if needed)
+5. Select your repository: `PapaniaP/Claudie`
+6. Choose the branch: **`claude/tennis-coach-landing-LdThe`**
+7. **Build settings** (auto-detected from `netlify.toml`):
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+   - (These are already configured - just verify they're correct)
+8. Click **"Deploy [site-name]"**
+9. Wait 1-2 minutes for the build to complete
+10. Get your live URL: `your-site-name.netlify.app`
 
 **Benefits:**
-- Simple drag-and-drop option also available
-- Free hosting
-- Instant rollbacks
-- Form handling included (works with our contact form!)
+- Free hosting with SSL
+- Instant rollbacks if needed
+- **Built-in form handling** (works with our contact form - no backend needed!)
+- Automatic deploys on git push
+- Easy custom domain setup
 
 ## 📦 Option 3: GitHub Pages
 
