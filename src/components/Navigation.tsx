@@ -11,11 +11,6 @@ export const Navigation = () => {
     [0, 100],
     ['rgba(250, 248, 243, 0)', 'rgba(250, 248, 243, 0.98)']
   );
-  const textColor = useTransform(
-    scrollY,
-    [0, 100],
-    ['rgb(23, 23, 23)', 'rgb(23, 23, 23)']
-  );
 
   useEffect(() => {
     const handleScroll = () => {
