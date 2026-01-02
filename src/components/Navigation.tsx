@@ -10,7 +10,7 @@ export const Navigation = () => {
   const backgroundColor = useTransform(
     scrollY,
     [0, 100],
-    ['rgba(13, 26, 12, 0)', 'rgba(13, 26, 12, 0.95)']
+    ['rgba(13, 26, 12, 0)', 'rgba(13, 26, 12, 0.98)']
   );
 
   useEffect(() => {
@@ -31,26 +31,27 @@ export const Navigation = () => {
   return (
     <motion.nav
       style={{ backgroundColor }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-shadow duration-300 ${
         isScrolled ? 'shadow-lg' : ''
       }`}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+      <div className="container-custom">
+        <div className="flex items-center justify-between h-24">
           <motion.a
             href="#"
-            className="font-serif text-2xl text-white"
+            className="font-serif text-2xl md:text-3xl text-white tracking-tight"
             whileHover={{ opacity: 0.7 }}
+            transition={{ duration: 0.2 }}
           >
             Clay Court
           </motion.a>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-12">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-white hover:text-clay-300 transition-colors"
+                className="text-white/90 hover:text-white transition-colors duration-300 text-base tracking-wide"
               >
                 {link.label}
               </a>
@@ -59,9 +60,9 @@ export const Navigation = () => {
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white p-2"
+            className="md:hidden text-white p-2 hover:opacity-70 transition-opacity"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className="w-6 h-6" strokeWidth={1.5} /> : <Menu className="w-6 h-6" strokeWidth={1.5} />}
           </button>
         </div>
 
@@ -70,12 +71,12 @@ export const Navigation = () => {
           animate={{ height: isOpen ? 'auto' : 0 }}
           className="md:hidden overflow-hidden"
         >
-          <div className="py-4 space-y-4 bg-forest-900">
+          <div className="py-6 space-y-6 bg-forest-900/95 -mx-6 px-6 md:-mx-8 md:px-8 lg:-mx-12 lg:px-12">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="block text-white hover:text-clay-300 transition-colors"
+                className="block text-white/90 hover:text-white transition-colors text-lg"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
