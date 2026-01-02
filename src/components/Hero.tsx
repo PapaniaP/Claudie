@@ -1,78 +1,160 @@
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const Hero = () => {
+  const heroRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const maskRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!heroRef.current || !titleRef.current || !maskRef.current) return;
+
+    // Animate clip-path mask on scroll
+    gsap.to(maskRef.current, {
+      scrollTrigger: {
+        trigger: heroRef.current,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1,
+      },
+      clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)',
+    });
+
+    // Parallax title
+    gsap.to(titleRef.current, {
+      scrollTrigger: {
+        trigger: heroRef.current,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1,
+      },
+      y: 200,
+      opacity: 0,
+    });
+  }, []);
+
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Large Background Image */}
-      <div className="absolute inset-0 bg-gradient-to-br from-forest-900 via-forest-700 to-clay-700">
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute inset-0 flex items-center justify-center opacity-10">
-          <div className="text-white text-3xl font-light tracking-wider">CLAY COURT ACTION SHOT</div>
-        </div>
+    <section
+      ref={heroRef}
+      className="relative h-screen flex items-center justify-center overflow-hidden"
+    >
+      {/* Animated gradient overlay with clip-path */}
+      <div
+        ref={maskRef}
+        className="absolute inset-0 bg-gradient-to-br from-clay-500 via-clay-700 to-black opacity-60"
+        style={{
+          clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+        }}
+      />
+
+      {/* Animated grid */}
+      <div className="absolute inset-0 opacity-10">
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(198, 123, 62, 0.3) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(198, 123, 62, 0.3) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px',
+            animation: 'gridMove 20s linear infinite',
+          }}
+        />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center text-white container-custom">
+      <div className="relative z-10 container-custom text-center">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
         >
+          {/* Floating badges */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="mb-8"
+            className="flex justify-center gap-4 mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
           >
-            <div className="inline-block">
-              <p className="text-sm tracking-[0.3em] uppercase text-white/70 mb-2">Est. 2010</p>
-              <div className="h-px w-24 bg-white/30 mx-auto" />
-            </div>
+            <span className="px-6 py-2 bg-clay-500/20 backdrop-blur-sm text-clay-200 text-sm tracking-widest uppercase border border-clay-500/30">
+              Est. 2010
+            </span>
+            <span className="px-6 py-2 bg-clay-500/20 backdrop-blur-sm text-clay-200 text-sm tracking-widest uppercase border border-clay-500/30 animate-pulse-slow">
+              ITF Level 3
+            </span>
           </motion.div>
 
-          <h1 className="font-serif text-7xl md:text-8xl lg:text-9xl font-light mb-8 tracking-tight leading-[0.9]">
-            Clay Court<br />
-            <span className="italic">Excellence</span>
+          {/* Main title with text effects */}
+          <h1
+            ref={titleRef}
+            className="font-display text-8xl md:text-9xl lg:text-[12rem] font-bold text-white mb-8 leading-none"
+            style={{
+              textShadow: '0 0 80px rgba(198, 123, 62, 0.5)',
+            }}
+          >
+            <span className="inline-block" style={{
+              background: 'linear-gradient(to bottom, #fff 0%, #c67b3e 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              CLAY
+            </span>
+            <br />
+            <span className="inline-block italic text-clay-400">COURT</span>
           </h1>
 
           <motion.p
-            className="text-xl md:text-2xl font-light mb-16 text-white/80 tracking-wide"
+            className="text-2xl md:text-3xl text-white/70 mb-12 tracking-[0.2em] uppercase"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            transition={{ delay: 1 }}
           >
             Stein bei Nürnberg · Bavaria
           </motion.p>
 
-          <motion.a
-            href="#training"
-            className="inline-block bg-white text-forest-900 px-12 py-5 text-base font-medium tracking-wide hover:bg-white/90 transition-all duration-300"
-            initial={{ opacity: 0, y: 20 }}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
+            transition={{ delay: 1.5 }}
+            className="flex justify-center gap-6"
           >
-            Explore Training
-          </motion.a>
+            <a
+              href="#training"
+              className="group relative px-12 py-5 bg-clay-500 text-white text-lg tracking-wider overflow-hidden"
+            >
+              <span className="relative z-10">EXPLORE</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-clay-600 to-clay-700 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+            </a>
+            <a
+              href="#contact"
+              className="px-12 py-5 border-2 border-white text-white text-lg tracking-wider hover:bg-white hover:text-black transition-all duration-300"
+            >
+              CONTACT
+            </a>
+          </motion.div>
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll indicator with animation */}
       <motion.div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2"
+        animate={{ y: [0, 15, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
       >
-        <motion.div
-          animate={{ y: [0, 12, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown className="w-6 h-6 text-white/60" strokeWidth={1.5} />
-        </motion.div>
+        <div className="w-px h-20 bg-gradient-to-b from-clay-400 to-transparent" />
       </motion.div>
+
+      <style jsx>{`
+        @keyframes gridMove {
+          0% { transform: translateX(0) translateY(0); }
+          100% { transform: translateX(60px) translateY(60px); }
+        }
+      `}</style>
     </section>
   );
 };

@@ -1,19 +1,15 @@
-import { Navigation } from './components/Navigation';
+import { WebGLBackground } from './components/WebGLBackground';
 import { Hero } from './components/Hero';
 import { Training } from './components/Training';
-import { About } from './components/About';
 import { Contact } from './components/Contact';
-import { Footer } from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <Navigation />
+    <div className="min-h-screen bg-black">
+      <WebGLBackground />
       <Hero />
       <Training />
-      <About />
       <Contact />
-      <Footer />
     </div>
   );
 }

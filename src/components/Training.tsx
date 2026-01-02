@@ -1,110 +1,105 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const programs = [
-  {
-    title: 'Private Coaching',
-    subtitle: 'Personalized one-on-one training',
-    image: 'COACH & PLAYER',
-  },
-  {
-    title: 'Group Sessions',
-    subtitle: 'Small group competitive training',
-    image: 'GROUP TRAINING',
-  },
-  {
-    title: 'Tournament Prep',
-    subtitle: 'Match-ready conditioning',
-    image: 'MATCH PLAY',
-  },
+  { title: 'PRIVATE', subtitle: 'One-on-One Mastery', number: '01' },
+  { title: 'GROUP', subtitle: 'Team Dynamics', number: '02' },
+  { title: 'TOURNAMENT', subtitle: 'Competition Ready', number: '03' },
 ];
 
 export const Training = () => {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-10%' });
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    // Animate cards with stagger
+    cardsRef.current.forEach((card, index) => {
+      if (!card) return;
+
+      gsap.fromTo(
+        card,
+        {
+          clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
+          opacity: 0,
+        },
+        {
+          clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+          opacity: 1,
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 80%',
+            end: 'top 40%',
+            scrub: 1,
+          },
+          delay: index * 0.1,
+        }
+      );
+    });
+  }, []);
 
   return (
-    <section id="training" ref={ref} className="py-32 md:py-40 bg-white">
-      <div className="container-custom">
+    <section id="training" ref={sectionRef} className="relative py-40 bg-black overflow-hidden">
+      {/* Animated background shapes */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-clay-500/10 rounded-full blur-3xl animate-pulse-slow" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-clay-700/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }} />
+
+      <div className="container-custom relative z-10">
         {/* Header */}
         <motion.div
-          className="max-w-4xl mb-20 md:mb-28"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-32"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
         >
-          <h2 className="font-serif text-6xl md:text-7xl lg:text-8xl text-forest-900 mb-6 tracking-tight leading-tight">
-            Training<br />Programs
+          <h2 className="font-display text-7xl md:text-8xl lg:text-9xl text-white mb-8 leading-none">
+            TRAINING<br />
+            <span className="italic text-clay-400">PROGRAMS</span>
           </h2>
-          <p className="text-xl md:text-2xl text-forest-700/60 font-light max-w-2xl">
-            Tailored approaches for every level of play
-          </p>
+          <div className="h-1 w-40 bg-gradient-to-r from-clay-500 to-transparent" />
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+        {/* Cards Grid */}
+        <div className="grid md:grid-cols-3 gap-8">
           {programs.map((program, index) => (
-            <motion.div
+            <div
               key={program.title}
-              className="group cursor-pointer"
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+              ref={(el) => (cardsRef.current[index] = el)}
+              className="group relative aspect-[3/4] overflow-hidden bg-gradient-to-br from-clay-900 to-black border border-clay-500/20 cursor-pointer"
             >
-              {/* Image */}
-              <div className="relative aspect-[3/4] mb-6 overflow-hidden bg-forest-900">
-                <div className="absolute inset-0 bg-gradient-to-br from-clay-500 to-forest-700 flex items-center justify-center">
-                  <span className="text-white/20 text-xs tracking-widest">{program.image}</span>
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-clay-500/0 group-hover:bg-clay-500/20 transition-all duration-700" />
+
+              {/* Content */}
+              <div className="relative h-full p-10 flex flex-col justify-between">
+                <div className="text-9xl font-display text-clay-500/20 leading-none">
+                  {program.number}
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
 
-                {/* Hover overlay */}
-                <motion.div
-                  className="absolute inset-0 bg-clay-500/20"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.4 }}
-                />
+                <div>
+                  <h3 className="font-display text-5xl text-white mb-3 tracking-tight group-hover:text-clay-300 transition-colors duration-500">
+                    {program.title}
+                  </h3>
+                  <p className="text-clay-400 text-lg tracking-wider uppercase">
+                    {program.subtitle}
+                  </p>
+
+                  {/* Animated underline */}
+                  <div className="mt-6 h-px w-0 bg-clay-500 group-hover:w-full transition-all duration-700" />
+                </div>
               </div>
 
-              {/* Text */}
-              <div className="space-y-3">
-                <h3 className="font-serif text-3xl md:text-4xl text-forest-900 tracking-tight group-hover:text-clay-700 transition-colors duration-300">
-                  {program.title}
-                </h3>
-                <p className="text-base text-forest-700/60 font-light leading-relaxed">
-                  {program.subtitle}
-                </p>
-              </div>
-            </motion.div>
+              {/* Corner accent */}
+              <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-clay-500/50" />
+            </div>
           ))}
         </div>
-
-        {/* CTA */}
-        <motion.div
-          className="mt-24 md:mt-32 flex justify-center"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.8, duration: 0.8 }}
-        >
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-3 text-forest-900 hover:text-clay-700 transition-colors duration-300"
-          >
-            <span className="text-lg tracking-wide">Discuss Your Goals</span>
-            <motion.svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              initial={{ x: 0 }}
-              whileHover={{ x: 5 }}
-              transition={{ duration: 0.3 }}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </motion.svg>
-          </a>
-        </motion.div>
       </div>
     </section>
   );
