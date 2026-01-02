@@ -10,7 +10,7 @@
   }
 
   body {
-    @apply bg-black text-white;
+    @apply bg-clay-50 text-clay-900;
   }
 
   h1, h2, h3, h4, h5, h6 {

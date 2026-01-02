@@ -4,7 +4,7 @@ import * as THREE from 'three';
 
 export const ClayParticles = () => {
   const particlesRef = useRef<THREE.Points>(null);
-  const count = 2000;
+  const count = 1500;
 
   const [positions, colors] = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -12,6 +12,7 @@ export const ClayParticles = () => {
 
     const clayColor = new THREE.Color('#c67b3e');
     const darkClay = new THREE.Color('#8b4513');
+    const lightClay = new THREE.Color('#d4956a');
 
     for (let i = 0; i < count; i++) {
       const i3 = i * 3;
@@ -25,8 +26,9 @@ export const ClayParticles = () => {
       positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
       positions[i3 + 2] = radius * Math.cos(phi);
 
-      // Mix clay colors
-      const color = Math.random() > 0.5 ? clayColor : darkClay;
+      // Mix clay colors with more variety for light background
+      const random = Math.random();
+      const color = random > 0.66 ? clayColor : random > 0.33 ? darkClay : lightClay;
       colors[i3] = color.r;
       colors[i3 + 1] = color.g;
       colors[i3 + 2] = color.b;
@@ -60,12 +62,12 @@ export const ClayParticles = () => {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.05}
+        size={0.08}
         vertexColors
         transparent
-        opacity={0.8}
+        opacity={0.6}
         sizeAttenuation
-        blending={THREE.AdditiveBlending}
+        blending={THREE.NormalBlending}
       />
     </points>
   );
