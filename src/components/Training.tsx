@@ -7,22 +7,31 @@ gsap.registerPlugin(ScrollTrigger);
 
 const programs = [
   {
-    title: 'Individual Lessons',
-    description: 'Personalized one-on-one coaching tailored to your skill level and goals',
-    features: ['Technical analysis', 'Custom drills', 'Video feedback', 'Mental coaching'],
-    placeholder: 'One-on-one coaching session · Player receiving forehand instruction',
+    title: '1-on-1 Coaching',
+    subtitle: 'Your game, your pace',
+    description: 'Personalized coaching sessions focused on YOUR goals. Work on technique, strategy, or match prep.',
+    emoji: '🎯',
+    features: ['Video analysis', 'Custom drills', 'Flexible scheduling', 'All skill levels'],
+    color: 'from-orange-400 to-clay-500',
+    placeholder: 'Private lesson · Coach working one-on-one with player',
   },
   {
-    title: 'Group Training',
-    description: 'Dynamic group sessions for players to learn and compete together',
-    features: ['Match play', 'Group drills', 'Team exercises', 'Social environment'],
-    placeholder: 'Group training session · Multiple players practicing serves',
+    title: 'Group Sessions',
+    subtitle: 'Train together, grow together',
+    description: 'Join other players for dynamic group training. Perfect mix of drills, match play, and fun.',
+    emoji: '👥',
+    features: ['Max 6 players', 'Match practice', 'Social vibe', 'Weekly sessions'],
+    color: 'from-clay-400 to-amber-500',
+    placeholder: 'Group training · Players practicing volleys together',
   },
   {
-    title: 'Tournament Prep',
-    description: 'Intensive preparation for competitive tournament play',
-    features: ['Match strategy', 'Mental toughness', 'Competition drills', 'Performance analysis'],
-    placeholder: 'Competitive training · Player in tournament-style match',
+    title: 'Tournament Ready',
+    subtitle: 'Get competitive',
+    description: 'Intense prep for tournaments. Mental game, match tactics, and pressure training.',
+    emoji: '🏆',
+    features: ['Match simulation', 'Mental coaching', 'Strategy sessions', 'Performance tracking'],
+    color: 'from-amber-400 to-orange-500',
+    placeholder: 'Tournament prep · Intense match situation training',
   },
 ];
 
@@ -37,14 +46,14 @@ export const Training = () => {
     // Animate title
     gsap.fromTo(
       titleRef.current,
-      { opacity: 0, y: 100 },
+      { opacity: 0, y: 60 },
       {
         opacity: 1,
         y: 0,
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 70%',
-          end: 'top 30%',
+          end: 'top 40%',
           scrub: 1,
         },
       }
@@ -66,100 +75,101 @@ export const Training = () => {
           scrollTrigger: {
             trigger: card,
             start: 'top 85%',
-            end: 'top 45%',
+            end: 'top 50%',
             scrub: 1,
           },
-          delay: index * 0.15,
+          delay: index * 0.1,
         }
       );
     });
   }, []);
 
   return (
-    <section id="training" ref={sectionRef} className="relative py-32 md:py-40 bg-white overflow-hidden">
-      <div className="container-custom">
+    <section id="training" ref={sectionRef} className="relative py-24 md:py-32 bg-white overflow-hidden">
+      {/* Decorative blobs */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-clay-200/30 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-0 w-96 h-96 bg-orange-200/20 rounded-full blur-3xl" />
+
+      <div className="container-custom relative z-10">
         {/* Header */}
-        <motion.div
-          className="mb-20 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block px-6 py-2 bg-clay-100 text-clay-700 font-bold text-sm tracking-wider uppercase rounded-full mb-6"
+          >
+            Training Programs
+          </motion.div>
           <h2
             ref={titleRef}
-            className="font-display text-6xl md:text-7xl lg:text-8xl text-clay-900 mb-6 leading-[0.95]"
+            className="text-5xl md:text-6xl lg:text-7xl text-clay-900 mb-6 font-black"
           >
-            TRAINING
+            Find Your Perfect
             <br />
-            <span className="italic text-clay-600">PROGRAMS</span>
+            <span className="text-clay-600">Training Style</span>
           </h2>
-          <div className="h-1 w-32 bg-clay-600 mx-auto" />
-        </motion.div>
+        </div>
 
-        {/* Program Cards */}
-        <div className="space-y-24">
+        {/* Program Cards - Grid layout */}
+        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {programs.map((program, index) => (
             <div
               key={program.title}
               ref={(el) => (cardsRef.current[index] = el)}
               className="group relative"
             >
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                {/* Image placeholder - alternating left/right */}
-                <div className={`relative aspect-[4/3] ${index % 2 === 1 ? 'md:order-2' : ''}`}>
-                  <div className="absolute inset-0 bg-gradient-to-br from-clay-200 via-clay-300 to-clay-400 flex items-center justify-center overflow-hidden">
-                    <div className="text-center p-8">
-                      <div className="text-8xl mb-4">🎾</div>
-                      <p className="text-clay-700 font-medium tracking-wide">
-                        {program.title.toUpperCase()}
+              {/* Card */}
+              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-clay-100 hover:border-clay-400">
+                {/* Image placeholder */}
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${program.color} flex items-center justify-center`}>
+                    <div className="text-center p-6">
+                      <div className="text-7xl mb-3">{program.emoji}</div>
+                      <p className="text-white font-bold text-lg">
+                        IMAGE
                       </p>
-                      <p className="text-clay-600 text-sm mt-3 leading-relaxed max-w-md">
+                      <p className="text-white/90 text-xs mt-2 max-w-xs mx-auto">
                         {program.placeholder}
                       </p>
                     </div>
                   </div>
-
                   {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-clay-900/0 group-hover:bg-clay-900/10 transition-all duration-700" />
-
-                  {/* Corner accent */}
-                  <div className="absolute top-0 left-0 w-16 h-16 border-t-4 border-l-4 border-clay-900/20 group-hover:border-clay-900/40 transition-colors duration-500" />
-                  <div className="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-clay-900/20 group-hover:border-clay-900/40 transition-colors duration-500" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500" />
                 </div>
 
                 {/* Content */}
-                <div className={`space-y-6 ${index % 2 === 1 ? 'md:order-1' : ''}`}>
-                  <div>
-                    <div className="text-clay-400 text-sm tracking-[0.3em] uppercase font-medium mb-3">
-                      Program {String(index + 1).padStart(2, '0')}
-                    </div>
-                    <h3 className="font-display text-4xl md:text-5xl text-clay-900 mb-4 leading-tight">
+                <div className="p-6">
+                  <div className="mb-4">
+                    <h3 className="text-2xl font-black text-clay-900 mb-1">
                       {program.title}
                     </h3>
-                    <p className="text-clay-700 text-lg leading-relaxed">
-                      {program.description}
+                    <p className="text-clay-600 font-medium">
+                      {program.subtitle}
                     </p>
                   </div>
 
-                  {/* Features list */}
-                  <div className="space-y-3">
+                  <p className="text-clay-700 mb-6 leading-relaxed">
+                    {program.description}
+                  </p>
+
+                  {/* Features */}
+                  <div className="space-y-2 mb-6">
                     {program.features.map((feature) => (
-                      <div key={feature} className="flex items-center gap-3">
-                        <div className="w-1.5 h-1.5 bg-clay-600 rotate-45" />
-                        <span className="text-clay-800">{feature}</span>
+                      <div key={feature} className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 bg-clay-600 rounded-full" />
+                        <span className="text-sm text-clay-800">{feature}</span>
                       </div>
                     ))}
                   </div>
 
                   {/* CTA */}
-                  <div className="pt-4">
-                    <a
-                      href="#contact"
-                      className="inline-block px-8 py-3 bg-clay-600 text-white font-medium tracking-wider hover:bg-clay-700 transition-colors duration-300"
-                    >
-                      LEARN MORE
-                    </a>
-                  </div>
+                  <a
+                    href="#contact"
+                    className="block w-full text-center px-6 py-3 bg-clay-600 text-white font-bold rounded-lg hover:bg-clay-700 hover:scale-105 transition-all duration-300"
+                  >
+                    Learn More
+                  </a>
                 </div>
               </div>
             </div>
