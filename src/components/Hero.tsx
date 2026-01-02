@@ -149,7 +149,7 @@ export const Hero = () => {
         <div className="w-px h-20 bg-gradient-to-b from-clay-400 to-transparent" />
       </motion.div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes gridMove {
           0% { transform: translateX(0) translateY(0); }
           100% { transform: translateX(60px) translateY(60px); }
